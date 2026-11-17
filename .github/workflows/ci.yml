@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests y compilación
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            back/package-lock.json
+            front/package-lock.json
+
+      - name: Instalar backend
+        working-directory: back
+        run: npm ci
+
+      - name: Probar backend
+        working-directory: back
+        run: npm test
+
+      - name: Instalar frontend
+        working-directory: front
+        run: npm ci
+
+      - name: Probar frontend
+        working-directory: front
+        run: npm test
+
+      - name: Compilar frontend
+        working-directory: front
+        run: npm run build

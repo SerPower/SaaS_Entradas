@@ -1,0 +1,36 @@
+{
+  "name": "saas-entradas-back",
+  "version": "1.0.0",
+  "description": "Servidor backend API REST para SaaS Entradas",
+  "type": "module",
+  "engines": {
+    "node": "^22.9.0 || ^24.0.0 || ^26.0.0"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "worker": "node --env-file-if-exists=.env src/worker.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "echo 'Simulating backend lint check'"
+  },
+  "dependencies": {
+    "bullmq": "^5.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1",
+    "pg": "^8.12.0",
+    "pino": "^9.0.0",
+    "pino-http": "^10.0.0",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.5",
+    "stripe": "^22.2.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  }
+}
